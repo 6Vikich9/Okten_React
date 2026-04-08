@@ -1,0 +1,14 @@
+.component
+{
+    width: 320px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+   padding: 10px;
+}
+.title-component
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
