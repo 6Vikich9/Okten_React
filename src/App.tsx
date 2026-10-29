@@ -1,11 +1,12 @@
 import './App.css'
+import FormComponent from "./components/FormComponent.tsx";
+import type {FC} from "react";
 
-function App()
+const App: FC = () =>
 {
-
   return (
     <>
-
+      <FormComponent/>
     </>
   )
 }
