@@ -1,18 +1,34 @@
+import {useState} from "react";
 import {useForm} from "react-hook-form";
 import {joiResolver} from "@hookform/resolvers/joi";
 import carValidator from "../validators/car.validator.ts";
-import {addCar} from "../services/car.service.ts";
+import {addCar, getErrorMessage} from "../services/car.service.ts";
 import type {Car} from "../types/Car.ts";
 
-const SetterPage = () => {
-    const {handleSubmit, register, formState: {errors, isValid}} = useForm<Car>({mode: 'all', resolver: joiResolver(carValidator)});
+const SetterPage = () =>
+{
+    const {handleSubmit, register, reset, formState: {errors, isValid, isSubmitting}} = useForm<Car>({mode: 'all', resolver: joiResolver(carValidator)});
+    const [status, setStatus] = useState<{type: 'success' | 'error', text: string} | null>(null);
+
+    const onSubmit = async (formData: Car) =>
+    {
+        setStatus(null);
+        try
+        {
+            const created = await addCar(formData);
+            setStatus({type: 'success', text: `Car "${created?.brand ?? formData.brand}" was saved`});
+            reset();
+        }
+        catch (error)
+        {
+            setStatus({type: 'error', text: getErrorMessage(error)});
+        }
+    };
 
     return (
         <form
             className='flex flex-col gap-4 mx-auto my-10 max-w-md p-6 bg-white rounded-xl shadow-lg border border-gray-200'
-            onSubmit={handleSubmit((formData) => {
-                addCar(formData);
-            })}
+            onSubmit={handleSubmit(onSubmit)}
         >
             <h2 className='text-2xl font-bold text-center text-gray-800'>Add new car</h2>
 
@@ -50,11 +66,20 @@ const SetterPage = () => {
             </label>
 
             <button
-                disabled={!isValid}
+                disabled={!isValid || isSubmitting}
                 className='mt-2 rounded-lg bg-blue-600 py-2 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-blue-600'
             >
-                Send
+                {isSubmitting ? 'Sending...' : 'Send'}
             </button>
+
+            {status && (
+                <p
+                    role='status'
+                    className={`text-sm text-center ${status.type === 'success' ? 'text-green-600' : 'text-red-600'}`}
+                >
+                    {status.text}
+                </p>
+            )}
         </form>
     );
 };
