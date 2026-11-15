@@ -5,11 +5,17 @@ import {LoginPage} from "../pages/LoginPage.tsx";
 import {AuthResourcesPage} from "../pages/AuthResourcesPage.tsx";
 
 
+// Тут описано, яка адреса в браузері — яка сторінка
 export const routes = createBrowserRouter([
     {
-        path: '/', element: <MainLayout/>, children: [ // Set MainLayout as the root layout wrapper for all nested child routes[cite: 9]
+        // Головний маршрут "/" завжди показує MainLayout (меню зверху)
+        // У children лежать сторінки, які показуються всередині MainLayout, у місці <Outlet/>.
+        path: '/', element: <MainLayout/>, children: [
+            // index: true — це сторінка за замовчуванням, коли адреса просто "/"
             {index: true, element: <HomePage/>},
+            // адреса /login
             {path: 'login', element: <LoginPage/>},
+            // адреса /auth/resources
             {path: '/auth/resources', element: <AuthResourcesPage/>},
         ]
     }

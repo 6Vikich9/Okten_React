@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 
+// Меню з трьох посилань. Link працює як звичайне <a>, але без перезавантаження сторінки
 const Menu = () => {
     return (
         <div>

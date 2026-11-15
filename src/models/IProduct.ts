@@ -1,3 +1,5 @@
+// Модель товару: описує, які поля є в одного товару з сервера
+// Вона потрібна TypeScript для підказок і перевірок, на роботу сайту не впливає
 export interface IProduct
 {
     id: number;
@@ -24,6 +26,7 @@ export interface IProduct
     thumbnail: string;
 }
 
+// Розміри товару (без export, бо використовується тільки в цьому файлі)
 interface IDimensions
 {
     width: number;
@@ -31,6 +34,7 @@ interface IDimensions
     depth: number;
 }
 
+// Один відгук
 interface IReviews
 {
     rating: number;
@@ -40,6 +44,7 @@ interface IReviews
     reviewerEmail: string;
 }
 
+// Додаткова службова інформація про товар
 interface IMeta
 {
     createdAt: string;

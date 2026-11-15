@@ -1,15 +1,22 @@
 import {useEffect} from "react";
 import {login} from "../services/api.service.ts";
 
+// Сторінка входу. Якщо форми нема, то вхід робиться автоматично, коли сторінка відкрилась
 export const LoginPage = () =>
 {
     useEffect(() =>
     {
-        login({ // Automatically trigger login request with default credentials on component mount[cite: 12]
+        // Відправляємо логін і пароль на сервер.
+        // expiresInMins: 1 означає, що токен житиме тільки 1 хвилину, щоб швидко перевірити, як працює оновлення
+        login(
+        {
             username: 'emilys',
             password: 'emilyspass',
             expiresInMins: 1
         });
+        /* [] (порожній масив) означає, що ефект не залежить ні від чого,
+           тому він спрацює тільки 1 раз — коли сторінка вперше з'явилась */
+        // Якщо піти зі сторінки і повернутись, він спрацює знову
     }, []);
 
     return (
