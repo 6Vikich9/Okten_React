@@ -1,3 +1,4 @@
+
 import type { ISection } from "../models/ICard";
 
 export const sections: ISection[] =
@@ -13,7 +14,7 @@ export const sections: ISection[] =
                         task: "Обчисліть: 2/3 + 3/4",
                         answer: "17/12 = 1 5/12",
                         hint: "Наприклад: 5/8, 1 7/13",
-                        accepted: ["17/12"],
+                        accepted: ["17/12", "1 5/12"],
                     },
                     {
                         id: "percent",
@@ -43,7 +44,7 @@ export const sections: ISection[] =
                         text: "Дискримінант, теорема Вієта, неповні рівняння...",
                         task: "Розв'яжіть: x² − 5x + 6 = 0",
                         answer: "x = 2 або x = 3",
-                        hint: "Наприклад: x = 1 або x = 4 ",
+                        hint: "Наприклад: x = 1 або x = 4",
                     },
                     {
                         id: "systems",

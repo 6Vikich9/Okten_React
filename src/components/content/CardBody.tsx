@@ -19,6 +19,7 @@ const SECONDARY_BTN =
 
 const normalize = (s: string) =>
     s.toLowerCase()
+        .replace(/(\d)\s+(?=\d+\/)/g, "$1_")
         .replace(/\s+/g, "")
         .replace(/−/g, "-")
         .replace(/х/g, "x")
